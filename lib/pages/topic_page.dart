@@ -31,7 +31,7 @@ class _TopicPageState extends State<TopicPage> {
           child: Padding(
             padding: const EdgeInsets.all(25),
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               SizedBox(height: 20),
               SearchButton(),
               SizedBox(height: 30),
@@ -47,9 +47,9 @@ class _TopicPageState extends State<TopicPage> {
                   TopicButton(
                     isClicked: true,
                     onTap: null,
-                    icon: Icons.snowing,
+                    iconDefaultPath: "lib/assets/all_topics_unpressed.svg",
+                    iconPressedPath: "lib/assets/all_topics_pressed.svg",
                     text: "All Topics",
-                    color: Colors.red,
                   ),
                   SizedBox(
                     width: 10,
@@ -57,20 +57,21 @@ class _TopicPageState extends State<TopicPage> {
                   TopicButton(
                       isClicked: false,
                       onTap: null,
-                      icon: Icons.light,
+                      iconDefaultPath: "lib/assets/popular_unpressed.svg",
+                      iconPressedPath: "lib/assets/popular_pressed.svg",
                       text: "Popular",
-                      color: Colors.orange),
+                  )  
                 ],
               ),
-              SizedBox(height: 50),
+              SizedBox(height: 20),
               const Row(
                 children: [
                   TopicButton(
                     isClicked: false,
                     onTap: null,
-                    icon: Icons.star,
+                    iconDefaultPath: "lib/assets/newest_unpressed.svg",
+                    iconPressedPath: "lib/assets/newest_pressed.svg",
                     text: "Newest",
-                    color: Colors.purple,
                   ),
                   SizedBox(
                     width: 10,
@@ -78,9 +79,10 @@ class _TopicPageState extends State<TopicPage> {
                   TopicButton(
                       isClicked: false,
                       onTap: null,
-                      icon: Icons.favorite_border,
+                      iconDefaultPath: "lib/assets/favorite_unpressed.svg",
+                      iconPressedPath: "lib/assets/favorite_pressed.svg",
                       text: "Favorite",
-                      color: Colors.green),
+                  ) 
                 ],
               ),
               const SizedBox(height: 30),

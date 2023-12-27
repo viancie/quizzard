@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class TopicButton extends StatefulWidget {
   final bool isClicked;
   final void Function()? onTap;
-  final IconData icon;
+  final String iconPressedPath;
+  final String iconDefaultPath;
   final String text;
-  final Color color;
   const TopicButton(
       {super.key,
       required this.isClicked,
       required this.onTap,
-      required this.icon,
+      required this.iconPressedPath,
+      required this.iconDefaultPath,
       required this.text,
-      required this.color});
+    });
 
   @override
   State<TopicButton> createState() => _TopicButtonState();
@@ -21,6 +23,7 @@ class TopicButton extends StatefulWidget {
 class _TopicButtonState extends State<TopicButton> {
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
@@ -28,7 +31,7 @@ class _TopicButtonState extends State<TopicButton> {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: widget.isClicked
-                ? const Color.fromARGB(255, 82, 195, 255)
+                ? const Color(0xFF52C3FF)
                 : Colors.white,
             borderRadius: BorderRadius.circular(40),
             boxShadow: [
@@ -44,19 +47,9 @@ class _TopicButtonState extends State<TopicButton> {
           ),
           child: Row(
             children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: widget.isClicked ? Colors.white : widget.color,
-                ),
-                child: Icon(
-                  widget.icon,
-                  color: widget.isClicked
-                      ? const Color.fromARGB(255, 82, 195, 255)
-                      : Colors.white,
-                ),
-              ),
+              
+              SvgPicture.asset(widget.isClicked ? widget.iconPressedPath : widget.iconDefaultPath),
+              
               const SizedBox(
                 width: 10,
               ),

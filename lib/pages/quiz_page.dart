@@ -1,41 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:quizzard/components/topic_button.dart';
+import 'package:quizzard/model/quiz.dart';
 
-class QuizPage extends StatelessWidget {
+class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
+
+  @override
+  State<QuizPage> createState() => _QuizPageState();
+}
+
+class _QuizPageState extends State<QuizPage> {
+  
+  List<Quiz> myQuizzes = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 244, 253),
 
-      // bottomNavigationBar: Container(
-      //   padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-      //   child: GNav(
-      //       backgroundColor: Colors.white,
-      //       color: Colors.grey,
-      //       activeColor: Colors.white,
-      //       tabBorderRadius: 10,
-      //       tabBackgroundColor: const Color.fromARGB(255, 82, 195, 255),
-      //       iconSize: 30,
-      //       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      //       tabShadow: [
-      //         BoxShadow(color: Colors.white.withOpacity(0.5), blurRadius: 8)
-      //       ],
-      //       onTabChange: (index) {
-      //         if (index == 0) {
-      //           Navigator.pushNamed(context, '/topic_page');
-      //         }
-      //         if (index == 1) {
-      //           Navigator.pushNamed(context, '/bookmark_page');
-      //         }
-      //       },
-      //       tabs: const [
-      //         GButton(icon: Icons.home, text: "Home"),
-      //         GButton(icon: Icons.bookmark, text: "Bookmark"),
-      //         GButton(icon: Icons.search, text: "Quiz")
-      //       ]),
-      // ),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -45,11 +27,12 @@ class QuizPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(right: 24, left: 24),
+        padding: EdgeInsets.only(right: 24, left: 24),
         child: Column(
           children: [
+            SizedBox(height: 20),
             // text create quiz
-            Align(
+            const Align(
               alignment: Alignment.topLeft,
               child: Text(
                 "Create Quiz",
@@ -60,70 +43,96 @@ class QuizPage extends StatelessWidget {
                 )
               ),
             ),
-        
+            SizedBox(height: 20),
             // buttons for type of quiz
-            Row(
-              children: [
-                // multiple choice button
-                Container(
-                  height: 51,
-                  width: 145,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(143),
+            const Row(
+                children: [
+                  TopicButton(
+                    isClicked: false,
+                    onTap: null,
+                    iconDefaultPath: "lib/assets/multiple_choice.svg",
+                    iconPressedPath: "lib/assets/multiple_choice.svg",
+                    text: "Choices",
                   ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: SvgPicture.asset("lib/assets/multiple_choice.svg",
-                        height: 34,
-                        width: 34,),
-                      ),
-                      Text(
-                        "Multiple Choice",
-                        style: TextStyle(
-                          fontSize: 14
-                        )
-                      )
-                    ],
-                  )
-                ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  TopicButton(
+                      isClicked: false,
+                      onTap: null,
+                      iconDefaultPath: "lib/assets/true_false.svg",
+                      iconPressedPath: "lib/assets/true_false.svg",
+                      text: "True or False",
+                  )  
+                ],
+              ),
+              SizedBox(height: 20),
+              const Row(
+                children: [
+                  TopicButton(
+                    isClicked: false,
+                    onTap: null,
+                    iconDefaultPath: "lib/assets/fill_blanks.svg",
+                    iconPressedPath: "lib/assets/fill_blanks.svg",
+                    text: "Fill in Blanks",
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  TopicButton(
+                      isClicked: false,
+                      onTap: null,
+                      iconDefaultPath: "lib/assets/flash_cards.svg",
+                      iconPressedPath: "lib/assets/flash_cards.svg",
+                      text: "Flashcards",
+                  ) 
+                ],
+              ),
 
-                // true or false button
-                Container(
-                  height: 51,
-                  width: 145,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(143),
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: SvgPicture.asset("lib/assets/true_false.svg",
-                        height: 34,
-                        width: 34,),
-                      ),
-                      Text(
-                        "True or False",
-                        style: TextStyle(
-                          fontSize: 14
-                        )
-                      )
-                    ],
-                  )
-                )
-              ]
-            )
-        
+            SizedBox(height: 30),
             // my quizzes text
-        
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "My Quizzes",
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 25,
+                  
+                )
+              ),
+            ),
+
+            SizedBox(height: 10,),
             // list of quizzes
-        
+            myQuizzes.isEmpty ? 
+            const Padding(
+              padding: EdgeInsets.all(20),
+              child: Text(
+                "You haven't created any quizzes.", 
+                style: TextStyle(
+                  fontStyle: FontStyle.italic,
+                  fontSize: 18,
+                  fontWeight: FontWeight.normal
+                )),
+            ) :
+            ListView.builder(
+              itemBuilder: (context, index) {
+                return Container();
+            }),
+
             // try these! text
-        
+            const Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Try These!",
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 25,
+                  
+                )
+              ),
+            ),
             // list of built in quizzes 
           ]
         ),
