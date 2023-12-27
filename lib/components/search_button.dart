@@ -23,7 +23,7 @@ class SearchButton extends StatelessWidget {
             width: 10,
           ),
           Text(
-            "What do you want to learn? Test commit 2",
+            "What do you want to learn? Last test",
             style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 16,
