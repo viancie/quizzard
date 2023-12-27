@@ -25,7 +25,14 @@ class TopicPage extends StatelessWidget {
             tabShadow: [
               BoxShadow(color: Colors.white.withOpacity(0.5), blurRadius: 8)
             ],
-            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            onTabChange: (index) {
+              if (index == 1) {
+                Navigator.pushNamed(context, '/bookmark_page');
+              }
+              if (index == 2) {
+                Navigator.pushNamed(context, '/quiz_page');
+              }
+            },
             tabs: const [
               GButton(icon: Icons.home, text: "Home"),
               GButton(icon: Icons.bookmark, text: "Bookmark"),
