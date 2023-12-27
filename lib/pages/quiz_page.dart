@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class QuizPage extends StatelessWidget {
   const QuizPage({super.key});
@@ -39,10 +40,94 @@ class QuizPage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
-          "Quizzard! // forr quiz na",
+          "Quizzard!",
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
       ),
+      body: Padding(
+        padding: const EdgeInsets.only(right: 24, left: 24),
+        child: Column(
+          children: [
+            // text create quiz
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Create Quiz",
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 25,
+                  
+                )
+              ),
+            ),
+        
+            // buttons for type of quiz
+            Row(
+              children: [
+                // multiple choice button
+                Container(
+                  height: 51,
+                  width: 145,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(143),
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: SvgPicture.asset("lib/assets/multiple_choice.svg",
+                        height: 34,
+                        width: 34,),
+                      ),
+                      Text(
+                        "Multiple Choice",
+                        style: TextStyle(
+                          fontSize: 14
+                        )
+                      )
+                    ],
+                  )
+                ),
+
+                // true or false button
+                Container(
+                  height: 51,
+                  width: 145,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(143),
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: SvgPicture.asset("lib/assets/true_false.svg",
+                        height: 34,
+                        width: 34,),
+                      ),
+                      Text(
+                        "True or False",
+                        style: TextStyle(
+                          fontSize: 14
+                        )
+                      )
+                    ],
+                  )
+                )
+              ]
+            )
+        
+            // my quizzes text
+        
+            // list of quizzes
+        
+            // try these! text
+        
+            // list of built in quizzes 
+          ]
+        ),
+      )
     );
   }
 }
