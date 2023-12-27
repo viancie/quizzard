@@ -24,7 +24,7 @@ class _TopicButtonState extends State<TopicButton> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-          width: 175,
+          width: 150,
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: widget.isClicked
@@ -64,7 +64,7 @@ class _TopicButtonState extends State<TopicButton> {
                 widget.text,
                 style: TextStyle(
                     color: widget.isClicked ? Colors.white : Colors.black,
-                    fontSize: 17),
+                    fontSize: 15),
               ),
               // const SizedBox(
               //   width: 20,

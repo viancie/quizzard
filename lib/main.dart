@@ -5,6 +5,7 @@ import 'package:quizzard/pages/intro_page.dart';
 import 'package:quizzard/pages/quiz_page.dart';
 import 'package:quizzard/pages/search_page.dart';
 import 'package:quizzard/pages/startQuiz_page.dart';
+import 'package:quizzard/pages/subtopic_page.dart';
 import 'package:quizzard/pages/topicView_page.dart';
 import 'package:quizzard/pages/topic_page.dart';
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       '/topic_page': (context) => const TopicPage(),
       '/search_page': (context) => const SearchPage(),
       'topicView_page': (context) => const TopicViewPage(),
+      'subtopic_page': (context) => const SubtopicPage(),
       '/bookmark_page': (context) => const BookmarkPage(),
       '/quiz_page': (context) => const QuizPage(),
       '/startQuiz_page': (context) => const StartQuiz(),
