@@ -23,7 +23,7 @@ class SearchButton extends StatelessWidget {
             width: 10,
           ),
           Text(
-            "What do you want to learn? giatay",
+            "What do you want to learn? rawr",
             style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 16,
