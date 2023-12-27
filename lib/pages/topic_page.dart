@@ -11,7 +11,37 @@ class TopicPage extends StatefulWidget {
 }
 
 class _TopicPageState extends State<TopicPage> {
-  void nextPage() {}
+  bool isClicked1 = true;
+  bool isClicked2 = false;
+  bool isClicked3 = false;
+  bool isClicked4 = false;
+  void toggleClick1() {
+    setState(() {
+      isClicked1 = !isClicked1;
+      isClicked2 = isClicked3 = isClicked4 = false;
+    });
+  }
+
+  void toggleClick2() {
+    setState(() {
+      isClicked2 = !isClicked2;
+      isClicked1 = isClicked3 = isClicked4 = false;
+    });
+  }
+
+  void toggleClick3() {
+    setState(() {
+      isClicked3 = !isClicked3;
+      isClicked1 = isClicked2 = isClicked4 = false;
+    });
+  }
+
+  void toggleClick4() {
+    setState(() {
+      isClicked4 = !isClicked4;
+      isClicked1 = isClicked2 = isClicked3 = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,26 +57,26 @@ class _TopicPageState extends State<TopicPage> {
       ),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: 700,
+          height: 670,
           child: Padding(
             padding: const EdgeInsets.all(25),
             child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(height: 20),
-              SearchButton(),
-              SizedBox(height: 30),
-              Text(
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const SizedBox(height: 20),
+              const SearchButton(),
+              const SizedBox(height: 30),
+              const Text(
                 "Topics",
                 style: TextStyle(fontWeight: FontWeight.w900, fontSize: 25),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               //tong mga all topics
-              const Row(
+              Row(
                 children: [
                   TopicButton(
-                    isClicked: true,
-                    onTap: null,
+                    isClicked: isClicked1,
+                    onTap: toggleClick1,
                     iconDefaultPath: "lib/assets/all_topics_unpressed.svg",
                     iconPressedPath: "lib/assets/all_topics_pressed.svg",
                     text: "All Topics",
@@ -55,20 +85,20 @@ class _TopicPageState extends State<TopicPage> {
                     width: 10,
                   ),
                   TopicButton(
-                      isClicked: false,
-                      onTap: null,
-                      iconDefaultPath: "lib/assets/popular_unpressed.svg",
-                      iconPressedPath: "lib/assets/popular_pressed.svg",
-                      text: "Popular",
-                  )  
+                    isClicked: isClicked2,
+                    onTap: toggleClick2,
+                    iconDefaultPath: "lib/assets/popular_unpressed.svg",
+                    iconPressedPath: "lib/assets/popular_pressed.svg",
+                    text: "Popular",
+                  )
                 ],
               ),
-              SizedBox(height: 20),
-              const Row(
+              const SizedBox(height: 20),
+              Row(
                 children: [
                   TopicButton(
-                    isClicked: false,
-                    onTap: null,
+                    isClicked: isClicked3,
+                    onTap: toggleClick3,
                     iconDefaultPath: "lib/assets/newest_unpressed.svg",
                     iconPressedPath: "lib/assets/newest_pressed.svg",
                     text: "Newest",
@@ -77,12 +107,12 @@ class _TopicPageState extends State<TopicPage> {
                     width: 10,
                   ),
                   TopicButton(
-                      isClicked: false,
-                      onTap: null,
-                      iconDefaultPath: "lib/assets/favorite_unpressed.svg",
-                      iconPressedPath: "lib/assets/favorite_pressed.svg",
-                      text: "Favorite",
-                  ) 
+                    isClicked: isClicked4,
+                    onTap: toggleClick4,
+                    iconDefaultPath: "lib/assets/favorite_unpressed.svg",
+                    iconPressedPath: "lib/assets/favorite_pressed.svg",
+                    text: "Favorite",
+                  )
                 ],
               ),
               const SizedBox(height: 30),
@@ -93,8 +123,8 @@ class _TopicPageState extends State<TopicPage> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 4,
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
+                      return const Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10),
                         child: TopicTile(),
                       );
                     }),
