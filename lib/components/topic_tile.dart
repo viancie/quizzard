@@ -31,12 +31,12 @@ class TopicTile extends StatelessWidget {
               )
             ],
           ),
-          Text(
+          const Text(
             "General History",
             style: TextStyle(
                 fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
           ),
-          Text(
+          const Text(
             "Dive into history! We will embark on a captivating exploration of the past, unraveling the rich tapestry of human history.",
             textAlign: TextAlign.justify,
             style: TextStyle(

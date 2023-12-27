@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quizzard/components/search_button.dart';
+import 'package:quizzard/components/subtopic_tile.dart';
 
 class BookmarkPage extends StatelessWidget {
   const BookmarkPage({super.key});
@@ -14,6 +16,29 @@ class BookmarkPage extends StatelessWidget {
           "Quizzard!",
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(25),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const SizedBox(height: 20),
+          const SearchButton(),
+          const SizedBox(height: 30),
+          const Text(
+            "Bookmarks",
+            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 25),
+          ),
+          const SizedBox(height: 20),
+          Expanded(
+            child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return const Padding(
+                    padding: EdgeInsets.only(bottom: 10, top: 10),
+                    child: SubtopicTile(),
+                  );
+                }),
+          )
+        ]),
       ),
     );
   }

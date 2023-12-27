@@ -27,10 +27,10 @@ class _QuizPageState extends State<QuizPage> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.only(right: 24, left: 24),
+        padding: const EdgeInsets.only(right: 24, left: 24),
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // text create quiz
             const Align(
               alignment: Alignment.topLeft,
@@ -43,7 +43,7 @@ class _QuizPageState extends State<QuizPage> {
                 )
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // buttons for type of quiz
             const Row(
                 children: [
@@ -66,7 +66,7 @@ class _QuizPageState extends State<QuizPage> {
                   )  
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               const Row(
                 children: [
                   TopicButton(
@@ -89,7 +89,7 @@ class _QuizPageState extends State<QuizPage> {
                 ],
               ),
 
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             // my quizzes text
             const Align(
               alignment: Alignment.topLeft,
@@ -103,7 +103,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
             ),
 
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             // list of quizzes
             myQuizzes.isEmpty ? 
             const Padding(

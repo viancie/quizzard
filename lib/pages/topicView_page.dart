@@ -39,8 +39,8 @@ class TopicViewPage extends StatelessWidget {
             child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 10, top: 10),
+                  return const Padding(
+                    padding: EdgeInsets.only(bottom: 10, top: 10),
                     child: SubtopicTile(),
                   );
                 }),
