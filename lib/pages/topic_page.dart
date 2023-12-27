@@ -20,9 +20,16 @@ class TopicPage extends StatelessWidget {
       ),
       body: const Padding(
         padding: EdgeInsets.all(25),
-        child: Column(children: [
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(height: 20),
           SearchButton(),
+          SizedBox(height: 30),
+          Text(
+            "Topics",
+            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 25),
+          ),
+          SizedBox(height: 20),
+          Row(),
         ]),
       ),
     );

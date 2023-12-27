@@ -13,7 +13,7 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 244, 253),
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Search",
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
