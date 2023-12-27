@@ -1,44 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:quizzard/components/search_button.dart';
 import 'package:quizzard/components/topic_button.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:quizzard/components/topic_tile.dart';
 
-class TopicPage extends StatelessWidget {
+class TopicPage extends StatefulWidget {
   const TopicPage({super.key});
 
+  @override
+  State<TopicPage> createState() => _TopicPageState();
+}
+
+class _TopicPageState extends State<TopicPage> {
   void nextPage() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 244, 253),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-        child: GNav(
-            backgroundColor: Colors.white,
-            color: Colors.grey,
-            activeColor: Colors.white,
-            tabBorderRadius: 10,
-            tabBackgroundColor: const Color.fromARGB(255, 82, 195, 255),
-            iconSize: 30,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            tabShadow: [
-              BoxShadow(color: Colors.white.withOpacity(0.5), blurRadius: 8)
-            ],
-            onTabChange: (index) {
-              if (index == 1) {
-                Navigator.pushNamed(context, '/bookmark_page');
-              }
-              if (index == 2) {
-                Navigator.pushNamed(context, '/quiz_page');
-              }
-            },
-            tabs: const [
-              GButton(icon: Icons.home, text: "Home"),
-              GButton(icon: Icons.bookmark, text: "Bookmark"),
-              GButton(icon: Icons.search, text: "Quiz")
-            ]),
-      ),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -47,8 +25,8 @@ class TopicPage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(25),
+      body: Padding(
+        padding: const EdgeInsets.all(25),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(height: 20),
           SearchButton(),
@@ -60,7 +38,7 @@ class TopicPage extends StatelessWidget {
           SizedBox(height: 20),
 
           //tong mga all topics
-          Row(
+          const Row(
             children: [
               TopicButton(
                 isClicked: true,
@@ -69,7 +47,7 @@ class TopicPage extends StatelessWidget {
                 text: "All Topics",
                 color: Colors.red,
               ),
-              const SizedBox(
+              SizedBox(
                 width: 10,
               ),
               TopicButton(
@@ -81,7 +59,7 @@ class TopicPage extends StatelessWidget {
             ],
           ),
           SizedBox(height: 20),
-          Row(
+          const Row(
             children: [
               TopicButton(
                 isClicked: false,
@@ -90,7 +68,7 @@ class TopicPage extends StatelessWidget {
                 text: "Newest",
                 color: Colors.purple,
               ),
-              const SizedBox(
+              SizedBox(
                 width: 10,
               ),
               TopicButton(
@@ -100,6 +78,20 @@ class TopicPage extends StatelessWidget {
                   text: "Favorite",
                   color: Colors.green),
             ],
+          ),
+          const SizedBox(height: 30),
+          //TopicTile(),
+
+          Expanded(
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: TopicTile(),
+                  );
+                }),
           ),
         ]),
       ),
