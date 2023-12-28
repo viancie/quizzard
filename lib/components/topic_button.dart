@@ -3,11 +3,11 @@ import 'package:flutter_svg/svg.dart';
 
 class TopicButton extends StatefulWidget {
   final bool isClicked;
-  final void Function()? onTap;
+  void Function()? onTap;
   final String iconPressedPath;
   final String iconDefaultPath;
   final String text;
-  const TopicButton(
+  TopicButton(
       {super.key,
       required this.isClicked,
       required this.onTap,
