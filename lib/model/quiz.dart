@@ -20,7 +20,7 @@ class Quiz {
     questionTable = HashMap();
   }
   void setType(int t) {
-    type = "0";
+    type = t.toString();
   }
 
   void addQuestionTable(HashMap<Question, String> qt) {

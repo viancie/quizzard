@@ -18,13 +18,13 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   final TextEditingController _controller = TextEditingController();
   int selected = -1;
-  List<Quiz> myQuizzes = [];
+
   List<Quiz> tryTheseQuizzes = DataRepository.quizList;
 
   void saveQuiz() {
     setState(() {
       HashMap<Question, String> hTable = HashMap();
-      myQuizzes.add(Quiz(_controller.text, selected.toString(), hTable));
+      DataRepository.myQuizList.add(Quiz(_controller.text, selected.toString(), hTable));
       _controller.clear();
     });
     Navigator.pop(context);
@@ -100,7 +100,6 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    tryTheseQuizzes.add(Quiz.onlyTitle("General History"));
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 244, 253),
@@ -189,7 +188,7 @@ class _QuizPageState extends State<QuizPage> {
                 height: 10,
               ),
               // list of quizzes
-              myQuizzes.isEmpty
+              DataRepository.myQuizList.isEmpty
                   ? const Padding(
                       padding: EdgeInsets.all(20),
                       child: Text("You haven't created any quizzes.",
@@ -201,10 +200,10 @@ class _QuizPageState extends State<QuizPage> {
                   : SizedBox(
                       height: 151,
                       child: ListView.builder(
-                          itemCount: myQuizzes.length,
+                          itemCount: DataRepository.myQuizList.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return MyQuiz(quiz: myQuizzes[index], typeQuiz: 0);
+                            return MyQuiz(quiz: DataRepository.myQuizList[index], typeQuiz: 0);
                           }),
                     ),
               const SizedBox(

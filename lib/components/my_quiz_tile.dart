@@ -82,39 +82,42 @@ class _MyQuiz extends State<MyQuiz> {
 
               widget.typeQuiz == 0
                   ? Padding(
-                      padding: const EdgeInsets.only(left: 40),
+                      padding: const EdgeInsets.only(left: 52),
                       child: Row(
                         children: [
                           // play icon
-                          IconButton(
-                            icon: SvgPicture.asset("lib/assets/play_icon.svg"),
-                            onPressed: () {
+
+                          GestureDetector(
+                            onTap: () {
                               Navigator.pushNamed(context, '/startQuiz_page');
                             },
-                          ),
+                              child:
+                                  SvgPicture.asset("lib/assets/play_icon.svg")),
+                          
+                          SizedBox(width: 7,),
+
                           // edit icon
                           Padding(
                             padding: const EdgeInsets.only(left: 2),
-                            child: IconButton(
-                              icon:
-                                  SvgPicture.asset("lib/assets/edit_icon.svg"),
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/editQuiz_page');
-                              },
-                            ),
+                            child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, '/editQuiz_page');
+                                },
+                                child: SvgPicture.asset(
+                                    "lib/assets/edit_icon.svg")),
                           )
                         ],
                       ),
                     )
                   : Padding(
                       padding: const EdgeInsets.only(left: 100),
-                      child: IconButton(
-                        icon: SvgPicture.asset("lib/assets/play_icon.svg"),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/startQuiz_page');
-                        },
-                      ),
-                    )
+                      child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/startQuiz_page');
+                          },
+                          child: SvgPicture.asset("lib/assets/play_icon.svg")),
+                    ),
             ],
           ),
         ));

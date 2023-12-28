@@ -15,6 +15,7 @@ class DataRepository {
   static List<Topic> _popularList = [];
   static List<Topic> _newestList = [];
   static final List<Subtopic> _bookmarkList = [];
+  static final List<Quiz> _myQuizList = [];
 
   static Future<void> loadData() async {
     //loading topic data
@@ -149,4 +150,5 @@ class DataRepository {
   static List<Topic> get favoriteList => _favoriteList;
   static List<Subtopic> get bookmarkList => _bookmarkList;
   static List<Quiz> get quizList => _quizList;
+  static List<Quiz> get myQuizList => _myQuizList;
 }
