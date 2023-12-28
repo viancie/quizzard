@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quizzard/model/subtopic.dart';
 
 class SubtopicPage extends StatelessWidget {
-  const SubtopicPage({super.key});
+  final Subtopic subtopic;
+  const SubtopicPage({super.key, required this.subtopic});
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +12,9 @@ class SubtopicPage extends StatelessWidget {
       appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          title: const Text(
-            "General History",
-            style: TextStyle(fontWeight: FontWeight.w900),
+          title: Text(
+            subtopic.getTopic.getTopicName,
+            style: const TextStyle(fontWeight: FontWeight.w900),
           )),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -36,10 +38,11 @@ class SubtopicPage extends StatelessWidget {
                 )
               ],
             ),
-            child: const Center(
+            child: Center(
               child: Text(
-                "World War II",
-                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
+                subtopic.getSubtopicName,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
               ),
             ),
           ),
@@ -59,11 +62,11 @@ class SubtopicPage extends StatelessWidget {
                   )
                 ],
               ),
-              child: const SingleChildScrollView(
+              child: SingleChildScrollView(
                 child: Text(
-                  "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis.",
+                  subtopic.getDescription,
                   textAlign: TextAlign.justify,
-                  style: TextStyle(fontSize: 17),
+                  style: const TextStyle(fontSize: 17),
                 ),
               ),
             ),

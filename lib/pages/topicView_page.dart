@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:quizzard/components/search_button.dart';
 import 'package:quizzard/components/subtopic_tile.dart';
+import 'package:quizzard/model/topic.dart';
 
 class TopicViewPage extends StatelessWidget {
-  const TopicViewPage({super.key});
+  final Topic topic;
+  TopicViewPage({super.key, required this.topic});
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +14,8 @@ class TopicViewPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Text(
-          "Topic View Page",
+        title: Text(
+          topic.getTopicName,
           style: TextStyle(fontWeight: FontWeight.w900),
         ),
       ),
@@ -20,28 +23,15 @@ class TopicViewPage extends StatelessWidget {
         padding: const EdgeInsets.all(25),
         child: Column(children: [
           const SizedBox(height: 20),
-          TextField(
-            //onChanged: (value) => //method na pang search
-            autofocus: true,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide.none,
-              ),
-              hintText: "What do you want to learn?",
-              prefixIcon: const Icon(Icons.search),
-            ),
-          ),
+          const SearchButton(),
           const SizedBox(height: 30),
           Expanded(
             child: ListView.builder(
-                itemCount: 10,
+                itemCount: topic.getSubtopics.length,
                 itemBuilder: (context, index) {
-                  return const Padding(
-                    padding: EdgeInsets.only(bottom: 10, top: 10),
-                    child: SubtopicTile(),
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 10, top: 10),
+                    child: SubtopicTile(subtopic: topic.getSubtopics[index]),
                   );
                 }),
           )
