@@ -23,7 +23,10 @@ class TopicViewPage extends StatelessWidget {
         padding: const EdgeInsets.all(25),
         child: Column(children: [
           const SizedBox(height: 20),
-          const SearchButton(),
+          SearchButton(
+            type: "2",
+            topic: topic,
+          ),
           const SizedBox(height: 30),
           Expanded(
             child: ListView.builder(

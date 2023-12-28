@@ -39,6 +39,8 @@ class TopicTile extends StatelessWidget {
               HeartButton(
                 isLiked: topic.getIsLiked,
                 onTap: () {},
+                colorClicked: const Color.fromARGB(255, 112, 31, 40),
+                colorNotClicked: Colors.white,
               )
             ],
           ),

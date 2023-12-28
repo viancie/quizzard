@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:quizzard/model/topic.dart';
+import 'package:quizzard/pages/search_page.dart';
 
 class SearchButton extends StatelessWidget {
-  const SearchButton({super.key});
+  final String type;
+  final Topic topic;
+  const SearchButton({super.key, required this.type, required this.topic});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/search_page'),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SearchPage(
+                    type: type,
+                    topic: topic,
+                  ))),
       child: Container(
         //padding: const EdgeInsets.all(15),
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),

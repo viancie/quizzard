@@ -68,7 +68,7 @@ class DataRepository {
         result[0].setSubtopics(subtopicList);
         tn = topicName;
         subtopicList = [];
-        subtopicList.add(subtopic);
+        i--;
       } else {
         subtopicList.add(subtopic);
         subtopic.setTopic(_topicList

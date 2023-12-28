@@ -71,7 +71,10 @@ class _TopicPageState extends State<TopicPage> {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const SizedBox(height: 20),
-              const SearchButton(),
+              SearchButton(
+                  type: "1",
+                  topic: Topic(
+                      topicName: "rawr", description: "ngi", isLiked: "wow")),
               const SizedBox(height: 30),
               const Text(
                 "Topics",

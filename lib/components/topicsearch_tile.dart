@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:quizzard/components/bookmark_button.dart';
-import 'package:quizzard/model/subtopic.dart';
-import 'package:quizzard/pages/subtopic_page.dart';
+import 'package:quizzard/components/heart_button.dart';
+import 'package:quizzard/model/topic.dart';
+import 'package:quizzard/pages/topicView_page.dart';
 
-class SubtopicTile extends StatelessWidget {
-  final Subtopic subtopic;
-  const SubtopicTile({super.key, required this.subtopic});
+class TopicSearch extends StatelessWidget {
+  final Topic topic;
+  TopicSearch({super.key, required this.topic});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SubtopicPage(subtopic: subtopic))),
+      onTap: () => Navigator.push(context,
+          MaterialPageRoute(builder: (context) => TopicViewPage(topic: topic))),
       child: Container(
         padding: const EdgeInsets.all(20),
         height: 70,
@@ -32,10 +30,15 @@ class SubtopicTile extends StatelessWidget {
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
-            subtopic.getSubtopicName,
+            topic.getTopicName,
             style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
           ),
-          BookmarkButton(isLiked: subtopic.getIsBookmarked, onTap: () {}),
+          HeartButton(
+            isLiked: topic.getIsLiked,
+            onTap: () {},
+            colorClicked: Colors.black,
+            colorNotClicked: Colors.black,
+          ),
         ]),
       ),
     );
