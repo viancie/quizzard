@@ -25,5 +25,4 @@ class Quiz {
     questionTable.addAll({q: answer});
   }
 
-  
 }
