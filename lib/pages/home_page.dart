@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quizzard/controller/datarepo.dart';
+import 'package:quizzard/model/topic.dart';
 import 'package:quizzard/pages/bookmark_page.dart';
 import 'package:quizzard/pages/quiz_page.dart';
 import 'package:quizzard/pages/topic_page.dart';
@@ -13,10 +15,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int index = 0;
+  @override
+  void initState() {
+    super.initState();
+    DataRepository.loadData();
+  }
+  //List<Topic> topicList = DataRepository.topicList;
 
   @override
   Widget build(BuildContext context) {
-    final screens = [const TopicPage(), const BookmarkPage(), const QuizPage()];
+    final screens = [TopicPage(), BookmarkPage(), const QuizPage()];
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 244, 253),

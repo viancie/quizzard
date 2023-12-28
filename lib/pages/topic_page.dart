@@ -1,11 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:quizzard/components/search_button.dart';
 import 'package:quizzard/components/topic_button.dart';
 import 'package:quizzard/components/topic_tile.dart';
+import 'package:quizzard/controller/datarepo.dart';
+import 'package:quizzard/model/topic.dart';
 
 class TopicPage extends StatefulWidget {
   const TopicPage({super.key});
-
   @override
   State<TopicPage> createState() => _TopicPageState();
 }
@@ -19,6 +21,7 @@ class _TopicPageState extends State<TopicPage> {
     setState(() {
       isClicked1 = !isClicked1;
       isClicked2 = isClicked3 = isClicked4 = false;
+      topicList = DataRepository.topicList;
     });
   }
 
@@ -26,6 +29,7 @@ class _TopicPageState extends State<TopicPage> {
     setState(() {
       isClicked2 = !isClicked2;
       isClicked1 = isClicked3 = isClicked4 = false;
+      topicList = DataRepository.popularList;
     });
   }
 
@@ -33,6 +37,7 @@ class _TopicPageState extends State<TopicPage> {
     setState(() {
       isClicked3 = !isClicked3;
       isClicked1 = isClicked2 = isClicked4 = false;
+      topicList = DataRepository.newestList;
     });
   }
 
@@ -40,8 +45,11 @@ class _TopicPageState extends State<TopicPage> {
     setState(() {
       isClicked4 = !isClicked4;
       isClicked1 = isClicked2 = isClicked3 = false;
+      topicList = DataRepository.favoriteList;
     });
   }
+
+  List<Topic> topicList = DataRepository.topicList;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +89,7 @@ class _TopicPageState extends State<TopicPage> {
                     iconPressedPath: "lib/assets/all_topics_pressed.svg",
                     text: "All Topics",
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   TopicButton(
@@ -103,7 +111,7 @@ class _TopicPageState extends State<TopicPage> {
                     iconPressedPath: "lib/assets/newest_pressed.svg",
                     text: "Newest",
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   TopicButton(
@@ -121,11 +129,30 @@ class _TopicPageState extends State<TopicPage> {
               Expanded(
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 4,
+                    itemCount: topicList.length,
                     itemBuilder: (context, index) {
-                      return const Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10),
-                        child: TopicTile(),
+                      int i = index;
+                      List<Color> colors = [
+                        Colors.orange,
+                        Colors.purple,
+                        Colors.green
+                      ];
+                      List<String> images = [
+                        'lib/assets/topic_image.svg',
+                        'lib/assets/topic_image1.svg',
+                        'lib/assets/topic_image1.svg'
+                      ];
+
+                      if (index > 2) {
+                        i = index % 3;
+                      }
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: TopicTile(
+                          topic: topicList[index],
+                          color: colors[i],
+                          imageUrl: images[i],
+                        ),
                       );
                     }),
               ),

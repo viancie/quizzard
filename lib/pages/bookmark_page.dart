@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:quizzard/components/search_button.dart';
 import 'package:quizzard/components/subtopic_tile.dart';
+import 'package:quizzard/controller/datarepo.dart';
+import 'package:quizzard/model/subtopic.dart';
 
 class BookmarkPage extends StatelessWidget {
-  const BookmarkPage({super.key});
-
+  BookmarkPage({super.key});
+  final List<Subtopic> subtopicList = DataRepository.bookmarkList;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,11 +32,13 @@ class BookmarkPage extends StatelessWidget {
           const SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
-                itemCount: 10,
+                itemCount: subtopicList.length,
                 itemBuilder: (context, index) {
-                  return const Padding(
+                  return Padding(
                     padding: EdgeInsets.only(bottom: 10, top: 10),
-                    child: SubtopicTile(),
+                    child: SubtopicTile(
+                      subtopic: subtopicList[index],
+                    ),
                   );
                 }),
           )
