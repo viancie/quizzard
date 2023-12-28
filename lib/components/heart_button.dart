@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 
 class HeartButton extends StatefulWidget {
   bool isLiked;
+  Color colorClicked;
+  Color colorNotClicked;
   final void Function()? onTap;
-  HeartButton({super.key, required this.isLiked, required this.onTap});
+  HeartButton(
+      {super.key,
+      required this.isLiked,
+      required this.onTap,
+      required this.colorClicked,
+      required this.colorNotClicked});
 
   @override
   State<HeartButton> createState() => _HeartButtonState();
@@ -21,10 +28,8 @@ class _HeartButtonState extends State<HeartButton> {
     return GestureDetector(
       onTap: toggleLike,
       child: Icon(
-        Icons.favorite,
-        color: widget.isLiked
-            ? const Color.fromARGB(255, 112, 31, 40)
-            : Colors.white,
+        widget.isLiked ? Icons.favorite : Icons.favorite_outline,
+        color: widget.isLiked ? widget.colorClicked : widget.colorNotClicked,
       ),
     );
   }

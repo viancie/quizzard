@@ -1,15 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:quizzard/components/subtopic_tile.dart';
+import 'package:quizzard/components/topicsearch_tile.dart';
+import 'package:quizzard/controller/datarepo.dart';
+import 'package:quizzard/model/subtopic.dart';
+import 'package:quizzard/model/topic.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
+  final String type;
+  final Topic topic;
+  SearchPage({super.key, required this.type, required this.topic});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
+  int length = 0;
+  List<Topic> topicList = List.from(DataRepository.topicList);
+  List<Subtopic> subtopicList = List.from(DataRepository.bookmarkList);
+  List<Subtopic> subtopics = [];
+
+  void lengthNum() {
+    if (widget.type == "1") {
+      length = topicList.length;
+    } else if (widget.type == "2") {
+      length = subtopics.length;
+    } else {
+      length = subtopicList.length;
+    }
+  }
+
+  void updateList1(String value) {
+    setState(() {
+      topicList = DataRepository.topicList
+          .where((element) =>
+              element.getTopicName!.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+      lengthNum();
+    });
+  }
+
+  void updateList2(String value) {
+    List<Subtopic> lists = List.from(widget.topic.getSubtopics);
+    setState(() {
+      subtopics = lists
+          .where((element) => element.getSubtopicName!
+              .toLowerCase()
+              .contains(value.toLowerCase()))
+          .toList();
+      lengthNum();
+    });
+  }
+
+  void updateList3(String value) {
+    setState(() {
+      subtopicList = DataRepository.bookmarkList
+          .where((element) => element.getSubtopicName!
+              .toLowerCase()
+              .contains(value.toLowerCase()))
+          .toList();
+      lengthNum();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (widget.type == "2") {
+      subtopics = List.from(widget.topic.getSubtopics);
+    }
+    lengthNum();
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 244, 253),
       appBar: AppBar(
@@ -24,7 +83,15 @@ class _SearchPageState extends State<SearchPage> {
         child: Column(children: [
           const SizedBox(height: 20),
           TextField(
-            //onChanged: (value) => //method na pang search
+            onChanged: (value) {
+              if (widget.type == "1") {
+                return updateList1(value);
+              } else if (widget.type == "2") {
+                return updateList2(value);
+              } else {
+                return updateList3(value);
+              }
+            }, //method na pang search
             autofocus: true,
             decoration: InputDecoration(
               filled: true,
@@ -37,6 +104,37 @@ class _SearchPageState extends State<SearchPage> {
               prefixIcon: const Icon(Icons.search),
             ),
           ),
+          const SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: ListView.builder(
+                itemCount: length,
+                itemBuilder: (context, index) {
+                  if (widget.type == "1") {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10, top: 10),
+                      child: TopicSearch(
+                        topic: topicList[index],
+                      ),
+                    );
+                  } else if (widget.type == "2") {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10, top: 10),
+                      child: SubtopicTile(
+                        subtopic: subtopics[index],
+                      ),
+                    );
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10, top: 10),
+                      child: SubtopicTile(
+                        subtopic: subtopicList[index],
+                      ),
+                    );
+                  }
+                }),
+          )
         ]),
       ),
     );
