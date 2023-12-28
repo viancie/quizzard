@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:quizzard/components/dialog_create.dart';
 import 'package:quizzard/components/my_quiz_tile.dart';
 import 'package:quizzard/components/topic_button.dart';
+import 'package:quizzard/controller/datarepo.dart';
 import 'package:quizzard/model/questions.dart';
 import 'package:quizzard/model/quiz.dart';
 
@@ -18,12 +19,12 @@ class _QuizPageState extends State<QuizPage> {
   final TextEditingController _controller = TextEditingController();
   int selected = -1;
   List<Quiz> myQuizzes = [];
-  List<Quiz> tryTheseQuizzes = [];
+  List<Quiz> tryTheseQuizzes = DataRepository.quizList;
 
   void saveQuiz() {
     setState(() {
       HashMap<Question, String> hTable = HashMap();
-      myQuizzes.add(Quiz(_controller.text, selected, hTable ));
+      myQuizzes.add(Quiz(_controller.text, selected.toString(), hTable));
       _controller.clear();
     });
     Navigator.pop(context);

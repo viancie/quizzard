@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizzard/controller/datarepo.dart';
 import 'package:quizzard/model/topic.dart';
 import 'package:quizzard/pages/bookmark_page.dart';
+import 'package:quizzard/pages/editQuiz_page.dart';
 import 'package:quizzard/pages/home_page.dart';
 import 'package:quizzard/pages/intro_page.dart';
 import 'package:quizzard/pages/quiz_page.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
       //'subtopic_page': (context) => const SubtopicPage(),
       '/bookmark_page': (context) => BookmarkPage(),
       '/quiz_page': (context) => const QuizPage(),
-      '/startQuiz_page': (context) => const StartQuiz(),
+      '/startQuiz_page': (context) => StartQuiz(),
+      '/editQuiz_page': (context) => const EditQuizPage(),
     });
   }
 }

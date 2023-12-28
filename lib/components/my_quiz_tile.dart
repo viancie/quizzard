@@ -5,7 +5,7 @@ import 'package:quizzard/model/quiz.dart';
 
 class MyQuiz extends StatefulWidget {
   final Quiz quiz;
-  final int typeQuiz; // 0 means customize, -1 means built in 
+  final int typeQuiz; // 0 means customize, -1 means built in
   const MyQuiz({super.key, required this.quiz, required this.typeQuiz});
 
   @override
@@ -30,25 +30,28 @@ class _MyQuiz extends State<MyQuiz> {
               )
             ]),
         child: Padding(
-          padding: const EdgeInsets.only(left: 18, right: 18, top: 18, bottom: 18),
+          padding:
+              const EdgeInsets.only(left: 18, right: 18, top: 18, bottom: 18),
           child: Column(
             children: [
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(widget.quiz.title,
-                    style:
-                        const TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 16)),
               ),
-              SizedBox(height: 3,),
+              SizedBox(
+                height: 3,
+              ),
               // type
               Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  widget.quiz.type == 1
+                  widget.quiz.type == "1"
                       ? "Type: Multiple Choice"
-                      : widget.quiz.type == 2
+                      : widget.quiz.type == "2"
                           ? "Type: True or False"
-                          : widget.quiz.type == 3
+                          : widget.quiz.type == "3"
                               ? "Type: Fill in the Blanks"
                               : "Type: Flash Cards",
                   style: const TextStyle(
@@ -58,7 +61,9 @@ class _MyQuiz extends State<MyQuiz> {
                   ),
                 ),
               ),
-              SizedBox(height: 3,),
+              SizedBox(
+                height: 3,
+              ),
               // number of items
               Align(
                 alignment: Alignment.topLeft,
@@ -71,27 +76,45 @@ class _MyQuiz extends State<MyQuiz> {
                   ),
                 ),
               ),
-              SizedBox(height: 6,),
+              SizedBox(
+                height: 6,
+              ),
 
-              widget.typeQuiz == 0 ?
-              Padding(
-                padding: const EdgeInsets.only(left: 50),
-                child: Row(
-                  children: [
-                    // play icon
-                    SvgPicture.asset("lib/assets/play_icon.svg"),
-                    // edit icon
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: SvgPicture.asset("lib/assets/edit_icon.svg"),
+              widget.typeQuiz == 0
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 40),
+                      child: Row(
+                        children: [
+                          // play icon
+                          IconButton(
+                            icon: SvgPicture.asset("lib/assets/play_icon.svg"),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/startQuiz_page');
+                            },
+                          ),
+                          // edit icon
+                          Padding(
+                            padding: const EdgeInsets.only(left: 2),
+                            child: IconButton(
+                              icon:
+                                  SvgPicture.asset("lib/assets/edit_icon.svg"),
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/editQuiz_page');
+                              },
+                            ),
+                          )
+                        ],
+                      ),
                     )
-                  ],
-                ),
-              )
-              : Padding(
-                padding: const EdgeInsets.only(left: 100),
-                child: SvgPicture.asset("lib/assets/play_icon.svg"),
-              )
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 100),
+                      child: IconButton(
+                        icon: SvgPicture.asset("lib/assets/play_icon.svg"),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/startQuiz_page');
+                        },
+                      ),
+                    )
             ],
           ),
         ));

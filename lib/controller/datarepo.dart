@@ -1,13 +1,17 @@
+import 'dart:collection';
 import 'dart:math';
 
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
+import 'package:quizzard/model/questions.dart';
+import 'package:quizzard/model/quiz.dart';
 import 'package:quizzard/model/subtopic.dart';
 import 'package:quizzard/model/topic.dart';
 
 class DataRepository {
   static final List<Topic> _topicList = [];
   static final List<Topic> _favoriteList = [];
+  static final List<Quiz> _quizList = [];
   static List<Topic> _popularList = [];
   static List<Topic> _newestList = [];
   static final List<Subtopic> _bookmarkList = [];
@@ -82,6 +86,46 @@ class DataRepository {
         )
         .toList();
     result[0].setSubtopics(subtopicList);
+
+    //loading quiz data
+    raw = await rootBundle.loadString('lib/files/quiz_data.tsv');
+    lines = const CsvToListConverter(fieldDelimiter: '\t').convert(raw);
+
+    String title = lines[1][0];
+    int type = lines[1][1].toInt();
+    Quiz quiz = Quiz.onlyTitle(title);
+    quiz.setType(type);
+    HashMap<Question, String> questionTable = HashMap();
+
+    for (int i = 1; i < lines.length; i++) {
+      String title1 = lines[i][0];
+      int type1 = lines[i][1].toInt();
+
+      if (title == title1 && type == type1) {
+        Question q;
+        if (type == 0) {
+          q = Question(lines[i][2],
+              [lines[i][4], lines[i][5], lines[i][6], lines[i][7]]);
+        } else {
+          q = Question.noChoices(lines[i][2]);
+        }
+        final quizEntry = {q: lines[i][3].toString()};
+        questionTable.addEntries(quizEntry.entries);
+      } else {
+        quiz.addQuestionTable(questionTable);
+        _quizList.add(quiz);
+
+        //reset
+        questionTable = HashMap();
+        title = title1;
+        type = type1;
+        quiz = Quiz.onlyTitle(title);
+        quiz.setType(type);
+        i--;
+      }
+    }
+    quiz.addQuestionTable(questionTable);
+    _quizList.add(quiz);
   }
 
   static List<Topic> randomizer() {
@@ -104,4 +148,5 @@ class DataRepository {
   static List<Topic> get newestList => _newestList;
   static List<Topic> get favoriteList => _favoriteList;
   static List<Subtopic> get bookmarkList => _bookmarkList;
+  static List<Quiz> get quizList => _quizList;
 }
