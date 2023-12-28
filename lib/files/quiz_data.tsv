@@ -1,0 +1,16 @@
+Title	Type	Question	Answer	A	B	C	D
+History Quiz	1	What was a key development during the Agricultural Revolution?	C	Invention of the printing press	Discovery of electricity	Domestication of plants and animals	Exploration of space
+History Quiz	1	Who is credited with being the first to circumnavigate the Earth during the Age of Exploration?	B	Christopher Columbus	Ferdinand Magellan	Vasco da Gama	Marco Polo
+History Quiz	1	What event triggered the start of World War I?	B	Bombing of Pearl Harbor	Assassination of Archduke Franz Ferdinand	Invasion of Poland	Signing of the Treaty of Versailles
+History Quiz	1	What was the main military alliance formed by Western countries during the Cold War?	A	NATO (North Atlantic Treaty Organization)	Warsaw Pact	SEATO (Southeast Asia Treaty Organization)	COMECON (Council for Mutual Economic Assistance)
+History Quiz	1	Who is regarded as the national hero of the Philippines for his role in the revolution against Spanish rule?	D	Andrés Bonifacio	Emilio Aguinaldo	Ferdinand Marcos	José Rizal
+Chemistry Quiz	4	What is the charge of an electron?	Negative				
+Chemistry Quiz	4	What functional group is in alcohols?	Hydroxyl				
+Chemistry Quiz	4	What technique separates components based on migration rates?	Chromatography				
+Chemistry Quiz	4	What is the building block of proteins?	Amino acids				
+Chemistry Quiz	4	How is the rate of a chemical reaction often expressed?	Concentration				
+Computer Science Quiz	2	The purpose of a compiler in computer science is to execute a program.	TRUE				
+Computer Science Quiz	2	Queue follows the Last In, First Out (LIFO) principle.	FALSE				
+Computer Science Quiz	2	Selection sort has an average time complexity of O(n log n).	FALSE				
+Computer Science Quiz	2	The purpose of the "break" statement in programming is to exit a loop or switch statement prematurely.	TRUE				
+Computer Science Quiz	2	The acronym "SQL" stands for Standard Query Language in database management.	TRUE				
