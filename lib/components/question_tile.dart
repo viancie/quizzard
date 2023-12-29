@@ -6,7 +6,13 @@ class QuestionTile extends StatefulWidget {
   final Question q;
   final int qNum;
   VoidCallback onDelete;
-  QuestionTile({super.key, required this.q, required this.qNum, required this.onDelete});
+  VoidCallback onEditQuestion;
+  QuestionTile(
+      {super.key,
+      required this.q,
+      required this.qNum,
+      required this.onDelete,
+      required this.onEditQuestion});
 
   @override
   State<QuestionTile> createState() => _QuestionTileState();
@@ -40,12 +46,14 @@ class _QuestionTileState extends State<QuestionTile> {
                     const TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
               ),
             ),
-            SvgPicture.asset("lib/assets/edit_icon.svg"),
+            GestureDetector(
+                onTap: widget.onEditQuestion,
+                child: SvgPicture.asset("lib/assets/edit_icon.svg")),
             SizedBox(
               width: 12,
             ),
             GestureDetector(
-              onTap: widget.onDelete,
+                onTap: widget.onDelete,
                 child: SvgPicture.asset("lib/assets/delete_icon.svg")),
           ],
         ));

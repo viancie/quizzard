@@ -9,10 +9,13 @@ class NewMCQuestion extends StatefulWidget {
   final choiceDController;
   VoidCallback onSaveQuestion;
   VoidCallback onCancel;
+  VoidCallback onUpdate;
   bool aIsClicked;
   bool bIsClicked;
   bool cIsClicked;
   bool dIsClicked;
+  String action; // either create or update
+  
   NewMCQuestion(
       {super.key,
       required this.qController,
@@ -22,10 +25,13 @@ class NewMCQuestion extends StatefulWidget {
       required this.choiceDController,
       required this.onSaveQuestion,
       required this.onCancel,
+      required this.onUpdate,
       required this.aIsClicked,
       required this.bIsClicked,
       required this.cIsClicked,
-      required this.dIsClicked});
+      required this.dIsClicked,
+      required this.action,
+      });
 
   @override
   State<NewMCQuestion> createState() => _NewMCQuestionState();
@@ -325,7 +331,8 @@ class _NewMCQuestionState extends State<NewMCQuestion> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: widget.onSaveQuestion,
+                    onTap: 
+                   widget.action == "Create" ? widget.onSaveQuestion : widget.onUpdate,
                     child: Container(
                         height: 40,
                         width: 110,
@@ -333,9 +340,9 @@ class _NewMCQuestionState extends State<NewMCQuestion> {
                           borderRadius: BorderRadius.circular(19),
                           color: Color(0xFF52C3FF),
                         ),
-                        child: const Center(
-                          child: Text(
-                            "Create",
+                        child: Center(
+                          child: Text( widget.action == "Create"?
+                            "Create" : "Update",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.white,
