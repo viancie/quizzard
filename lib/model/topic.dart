@@ -44,4 +44,9 @@ class Topic {
       return false;
     }
   }
+
+  List<dynamic> get toList {
+    List<String> text = [topicName, description, isLiked];
+    return text;
+  }
 }

@@ -1,6 +1,8 @@
 import 'dart:collection';
+import 'dart:io';
 import 'dart:math';
-
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
 import 'package:quizzard/model/questions.dart';
@@ -9,13 +11,14 @@ import 'package:quizzard/model/subtopic.dart';
 import 'package:quizzard/model/topic.dart';
 
 class DataRepository {
-  static final List<Topic> _topicList = [];
-  static final List<Topic> _favoriteList = [];
-  static final List<Quiz> _quizList = [];
+  static List<Topic> _topicList = [];
+  static List<Topic> _favoriteList = [];
+  static List<Quiz> _quizList = [];
   static List<Topic> _popularList = [];
   static List<Topic> _newestList = [];
-  static final List<Subtopic> _bookmarkList = [];
-  static final List<Quiz> _myQuizList = [];
+  static List<Subtopic> _bookmarkList = [];
+  static List<Quiz> _myQuizList = [];
+  static final _myBox = Hive.box('my box');
 
   static Future<void> loadData() async {
     //loading topic data
@@ -143,6 +146,24 @@ class DataRepository {
     }
     quiz.addQuestionTable(questionTable);
     _quizList.add(quiz);
+  }
+
+  static void load() {
+    _quizList = _myBox.get("QUIZ LIST");
+    _topicList = _myBox.get("TOPIC LIST");
+    _popularList = _myBox.get("POPULAR LIST");
+    _newestList = _myBox.get("NEWEST LIST");
+    _favoriteList = _myBox.get("FAVORITE LIST");
+    _bookmarkList = _myBox.get("BOOKMARK LIST");
+    _myQuizList = _myBox.get("MYQUIZ LIST");
+  }
+
+  static void updateQuizList() {
+    _myBox.put("QUIZ LIST", _quizList);
+  }
+
+  static void updateTopicList() {
+    _myBox.put("TOPIC LIST", _topicList);
   }
 
   static List<Topic> randomizer() {

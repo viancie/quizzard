@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quizzard/model/quiz.dart';
 import 'package:quizzard/pages/editQuiz_page.dart';
+import 'package:quizzard/pages/playQuiz_page.dart';
 import 'package:quizzard/pages/startQuiz_page.dart';
 
 class MyQuiz extends StatefulWidget {
@@ -116,7 +117,7 @@ class _MyQuiz extends State<MyQuiz> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              StartQuiz(quiz: widget.quiz)));
+                                              PlayQuizPage(quiz: widget.quiz)));
                                 }
                               },
                               child:
@@ -149,7 +150,7 @@ class _MyQuiz extends State<MyQuiz> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        StartQuiz(quiz: widget.quiz)));
+                                        PlayQuizPage(quiz: widget.quiz)));
                           },
                           child: SvgPicture.asset("lib/assets/play_icon.svg")),
                     ),

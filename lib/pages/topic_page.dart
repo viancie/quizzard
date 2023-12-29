@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:quizzard/components/search_button.dart';
 import 'package:quizzard/components/topic_button.dart';
 import 'package:quizzard/components/topic_tile.dart';
@@ -13,6 +14,13 @@ class TopicPage extends StatefulWidget {
 }
 
 class _TopicPageState extends State<TopicPage> {
+  final _myBox = Hive.box('myBox');
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   bool isClicked1 = true;
   bool isClicked2 = false;
   bool isClicked3 = false;
@@ -141,9 +149,9 @@ class _TopicPageState extends State<TopicPage> {
                         Colors.green
                       ];
                       List<String> images = [
-                        'lib/assets/topic_image.svg',
-                        'lib/assets/topic_image1.svg',
-                        'lib/assets/topic_image1.svg'
+                        'lib/assets/topic_image.png',
+                        'lib/assets/topic_image1.png',
+                        'lib/assets/topic_image2.png'
                       ];
 
                       if (index > 2) {
