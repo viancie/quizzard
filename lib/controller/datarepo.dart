@@ -103,14 +103,30 @@ class DataRepository {
       int type1 = lines[i][1].toInt();
 
       if (title == title1 && type == type1) {
+        String a = lines[i][4];
+        String b = lines[i][5];
+        String c = lines[i][6];
+        String d = lines[i][7];
+        String answer = lines[i][3].toString();
+
         Question q;
-        if (type == 0) {
-          q = Question(lines[i][2],
-              [lines[i][4], lines[i][5], lines[i][6], lines[i][7]]);
+        if (type == 1) {
+          q = Question(lines[i][2], ["A) $a", "B) $b", "C) $c", "D) $d"]);
+          if (answer == "A") {
+            answer = "A) $a";
+          } else if (answer == "B") {
+            answer = "B) $b";
+          } else if (answer == "C") {
+            answer = "C) $c";
+          } else if (answer == "D") {
+            answer = "D) $d";
+          }
+        } else if (type == 2) {
+          q = Question(lines[i][2], ["TRUE", "FALSE"]);
         } else {
           q = Question.noChoices(lines[i][2]);
         }
-        final quizEntry = {q: lines[i][3].toString()};
+        final quizEntry = {q: answer};
         questionTable.addEntries(quizEntry.entries);
       } else {
         quiz.addQuestionTable(questionTable);
