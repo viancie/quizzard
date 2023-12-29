@@ -16,8 +16,8 @@ class TopicSlide extends StatelessWidget {
             int i = index;
             List<Color> colors = [Colors.orange, Colors.purple, Colors.green];
             List<String> images = [
-              'lib/assets/topic_image.svg',
-              'lib/assets/topic_image1.svg',
+              'lib/assets/home.svg',
+              'lib/assets/topic_image2.svg',
               'lib/assets/topic_image1.svg'
             ];
 
