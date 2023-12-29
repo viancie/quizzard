@@ -5,6 +5,7 @@ class Topic {
   String description;
   String isLiked;
   late List<Subtopic> subtopics;
+  late bool liked;
 
   Topic(
       {required this.topicName,
@@ -23,6 +24,10 @@ class Topic {
     isLiked = l;
   }
 
+  void setLiked(bool l) {
+    liked = l;
+  }
+
   void setSubtopics(List<Subtopic> s) {
     subtopics = s;
   }
@@ -32,8 +37,10 @@ class Topic {
   List<Subtopic> get getSubtopics => subtopics;
   bool get getIsLiked {
     if (isLiked == "TRUE") {
+      liked = true;
       return true;
     } else {
+      liked = false;
       return false;
     }
   }

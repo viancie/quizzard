@@ -6,6 +6,7 @@ class Subtopic {
   String description;
   String references;
   String isBookmarked;
+  late bool bookmarked;
 
   Subtopic(
       {required this.subtopicName,
@@ -33,14 +34,29 @@ class Subtopic {
     isBookmarked = b;
   }
 
+  void setBookmarked(bool b) {
+    bookmarked = b;
+  }
+
   Topic get getTopic => topic;
   String get getSubtopicName => subtopicName;
   String get getDescription => description;
   String get getReferences => references;
+  bool get getBookmarked {
+    if (isBookmarked == "TRUE") {
+      bookmarked = true;
+    } else {
+      bookmarked = false;
+    }
+    return bookmarked;
+  }
+
   bool get getIsBookmarked {
     if (isBookmarked == "TRUE") {
+      bookmarked = true;
       return true;
     } else {
+      bookmarked = false;
       return false;
     }
   }

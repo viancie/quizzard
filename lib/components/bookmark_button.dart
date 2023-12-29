@@ -10,16 +10,10 @@ class BookmarkButton extends StatefulWidget {
 }
 
 class _BookmarkButtonState extends State<BookmarkButton> {
-  void toggleLike() {
-    setState(() {
-      widget.isLiked = !widget.isLiked;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: toggleLike,
+      onTap: widget.onTap,
       child: Icon(
         widget.isLiked ? Icons.bookmark : Icons.bookmark_outline,
         color: Colors.black,
