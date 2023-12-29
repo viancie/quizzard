@@ -15,6 +15,24 @@ class MyQuiz extends StatefulWidget {
 }
 
 class _MyQuiz extends State<MyQuiz> {
+  void checker() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: const Color.fromARGB(255, 230, 244, 253),
+            content: Container(
+                height: 50,
+                child: const Center(
+                  child: Text(
+                    "Quiz is empty!",
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
+                  ),
+                )),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -91,11 +109,15 @@ class _MyQuiz extends State<MyQuiz> {
 
                           GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            StartQuiz(quiz: widget.quiz)));
+                                if (widget.quiz.questionTable.isEmpty) {
+                                  checker();
+                                } else {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              StartQuiz(quiz: widget.quiz)));
+                                }
                               },
                               child:
                                   SvgPicture.asset("lib/assets/play_icon.svg")),

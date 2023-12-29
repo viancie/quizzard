@@ -22,6 +22,11 @@ class _StartQuizState extends State<StartQuiz> {
   bool done = false;
 
   List<bool> isPressed = [false, false, false, false];
+  void selectedValueBlanks(String value) {
+    setState(() {
+      selectedValue = value;
+    });
+  }
 
   void add() {
     setState(() {
@@ -52,7 +57,7 @@ class _StartQuizState extends State<StartQuiz> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          _timer = Timer(const Duration(seconds: 2), () {
+          _timer = Timer(const Duration(seconds: 1), () {
             Navigator.pop(context);
             add();
           });
@@ -198,129 +203,188 @@ class _StartQuizState extends State<StartQuiz> {
                       ),
                     ],
                   )
-                : Expanded(
-                    child: ListView.builder(
-                      itemCount: questionList[counter].choices.length + 1,
-                      itemBuilder: (context, index) {
-                        if (isFillIn) {
-                          // fill in the blanks
-                          return TextField(
-                              autofocus: true,
-                              decoration: InputDecoration(
+                : isFillIn
+                    ? Column(
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextField(
+                            autofocus: true,
+                            onChanged: (value) {
+                              selectedValueBlanks(value);
+                            },
+                            decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.only(
+                                    left: 15.0,
+                                    right: 15.0,
+                                    top: 10.0,
+                                    bottom: 10.0),
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(19),
                                   borderSide: BorderSide.none,
                                 ),
-                                hintText: "Enter answer",
-                              ));
-                        }
-                        if (index == questionList[counter].choices.length) {
-                          return Column(
-                            children: [
-                              const SizedBox(
-                                height: 20,
+                                hintText: 'Enter answer',
+                                hintStyle: const TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 17,
+                                  color: Color(0xFF727272),
+                                )),
+                          ),
+                          const SizedBox(
+                            height: 40,
+                          ),
+                          GestureDetector(
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              height: 50,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.blue,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    blurRadius: 2.0,
+                                    spreadRadius: 0.0,
+                                    offset: Offset(2.0, 2.0),
+                                  )
+                                ],
                               ),
-                              GestureDetector(
-                                child: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.blue,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        blurRadius: 2.0,
-                                        spreadRadius: 0.0,
-                                        offset: Offset(2.0, 2.0),
-                                      )
-                                    ],
+                              child: const Center(
+                                child: Text(
+                                  "Next",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              checker(
+                                  widget.quiz
+                                      .getQuestionTable[questionList[counter]]
+                                      .toString(),
+                                  doesFlip);
+                              if (counter == 4) {
+                                length = 0;
+                              }
+                            },
+                          ),
+                        ],
+                      )
+                    : Expanded(
+                        child: ListView.builder(
+                          itemCount: questionList[counter].choices.length + 1,
+                          itemBuilder: (context, index) {
+                            if (index == questionList[counter].choices.length) {
+                              return Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 20,
                                   ),
-                                  child: const Center(
+                                  GestureDetector(
+                                    child: Container(
+                                      padding: const EdgeInsets.all(10),
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: Colors.blue,
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Colors.grey,
+                                            blurRadius: 2.0,
+                                            spreadRadius: 0.0,
+                                            offset: Offset(2.0, 2.0),
+                                          )
+                                        ],
+                                      ),
+                                      child: const Center(
+                                        child: Text(
+                                          "Next",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 20),
+                                        ),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      checker(
+                                          widget
+                                              .quiz
+                                              .getQuestionTable[
+                                                  questionList[counter]]
+                                              .toString(),
+                                          doesFlip);
+                                      if (counter == 4) {
+                                        length = 0;
+                                      }
+                                      if (doesFlip) {
+                                        if (cardKey.currentState != null) {
+                                          //null safety
+                                          if (!cardKey.currentState!.isFront) {
+                                            cardKey.currentState!.toggleCard();
+                                          }
+                                        }
+                                      }
+                                    },
+                                  ),
+                                ],
+                              );
+                            }
+                            return Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      for (int i = 0; i < 4; i++) {
+                                        isPressed[i] = false;
+                                      }
+                                      isPressed[index] = true;
+                                      selectedValue =
+                                          questionList[counter].choices[index];
+                                    });
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(20),
+                                    //height: 70,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      color: isPressed[index]
+                                          ? Colors.green
+                                          : Colors.white,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.grey,
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.0,
+                                          offset: Offset(2.0, 2.0),
+                                        )
+                                      ],
+                                    ),
                                     child: Text(
-                                      "Next",
+                                      questionList[counter].choices[index],
                                       style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20),
+                                          fontWeight: FontWeight.w500,
+                                          color: isPressed[index]
+                                              ? Colors.white
+                                              : Colors.black),
                                     ),
                                   ),
                                 ),
-                                onTap: () {
-                                  checker(
-                                      widget
-                                          .quiz
-                                          .getQuestionTable[
-                                              questionList[counter]]
-                                          .toString(),
-                                      doesFlip);
-                                  if (counter == 4) {
-                                    length = 0;
-                                  }
-                                  if (doesFlip) {
-                                    if (cardKey.currentState != null) {
-                                      //null safety
-                                      if (!cardKey.currentState!.isFront) {
-                                        cardKey.currentState!.toggleCard();
-                                      }
-                                    }
-                                  }
-                                },
-                              ),
-                            ],
-                          );
-                        }
-                        return Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  for (int i = 0; i < 4; i++) {
-                                    isPressed[i] = false;
-                                  }
-                                  isPressed[index] = true;
-                                  selectedValue =
-                                      questionList[counter].choices[index];
-                                });
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.all(20),
-                                //height: 70,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: isPressed[index]
-                                      ? Colors.green
-                                      : Colors.white,
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      blurRadius: 2.0,
-                                      spreadRadius: 0.0,
-                                      offset: Offset(2.0, 2.0),
-                                    )
-                                  ],
+                                const SizedBox(
+                                  height: 20,
                                 ),
-                                child: Text(
-                                  questionList[counter].choices[index],
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      color: isPressed[index]
-                                          ? Colors.white
-                                          : Colors.black),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  )
+                              ],
+                            );
+                          },
+                        ),
+                      )
           ],
         ),
       ),
