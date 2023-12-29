@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quizzard/controller/datarepo.dart';
-import 'package:quizzard/model/topic.dart';
 import 'package:quizzard/pages/bookmark_page.dart';
 import 'package:quizzard/pages/editQuiz_page.dart';
 import 'package:quizzard/pages/home_page.dart';
@@ -12,9 +10,7 @@ import 'package:quizzard/pages/subtopic_page.dart';
 import 'package:quizzard/pages/topicView_page.dart';
 import 'package:quizzard/pages/topic_page.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await DataRepository.loadData;
+void main() {
   runApp(const MyApp());
 }
 
@@ -34,7 +30,7 @@ class MyApp extends StatelessWidget {
       '/bookmark_page': (context) => BookmarkPage(),
       '/quiz_page': (context) => const QuizPage(),
       '/startQuiz_page': (context) => StartQuiz(),
-      '/editQuiz_page': (context) => const EditQuizPage(),
+      // '/editQuiz_page': (context) => const EditQuizPage(),
     });
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quizzard/model/quiz.dart';
+import 'package:quizzard/pages/editQuiz_page.dart';
 
 class MyQuiz extends StatefulWidget {
   final Quiz quiz;
@@ -82,28 +83,31 @@ class _MyQuiz extends State<MyQuiz> {
 
               widget.typeQuiz == 0
                   ? Padding(
-                      padding: const EdgeInsets.only(left: 52),
+                      padding: const EdgeInsets.only(left: 53),
                       child: Row(
                         children: [
                           // play icon
 
                           GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/startQuiz_page');
-                            },
+                              onTap: () {
+                                Navigator.pushNamed(context, '/startQuiz_page');
+                              },
                               child:
                                   SvgPicture.asset("lib/assets/play_icon.svg")),
-                          
-                          SizedBox(width: 7,),
+
+                          SizedBox(
+                            width: 7,
+                          ),
 
                           // edit icon
                           Padding(
                             padding: const EdgeInsets.only(left: 2),
                             child: GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, '/editQuiz_page');
-                                },
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            EditQuizPage(quiz: widget.quiz))),
                                 child: SvgPicture.asset(
                                     "lib/assets/edit_icon.svg")),
                           )
