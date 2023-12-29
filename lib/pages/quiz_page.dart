@@ -24,10 +24,92 @@ class _QuizPageState extends State<QuizPage> {
   void saveQuiz() {
     setState(() {
       HashMap<Question, String> hTable = HashMap();
-      DataRepository.myQuizList.add(Quiz(_controller.text, selected.toString(), hTable));
+      DataRepository.myQuizList
+          .add(Quiz(_controller.text, selected.toString(), hTable));
       _controller.clear();
     });
     Navigator.pop(context);
+  }
+
+  void removeQuiz(int index) {
+    setState(() {
+      DataRepository.myQuizList.removeAt(index);
+    });
+    Navigator.pop(context);
+  }
+
+  void showWarning(int index) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: const Color(0xFFE6F4FD),
+            content: Padding(
+              padding: const EdgeInsets.only(top: 18, bottom: 18),
+              child: Container(
+                  height: 78,
+                  child: Column(
+                    children: [
+                      const Center(
+                        child: Text(
+                          "Do you want to delete this quiz?",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+              
+                      SizedBox(height: 15,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () => removeQuiz(index),
+                            child: Container(
+                                height: 40,
+                                width: 110,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(19),
+                                  color: Color(0xFFE3623C),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    "Yes",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                )),
+                          ),
+                          GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                                height: 40,
+                                width: 110,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(19),
+                                  color: Colors.white,
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    "No",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                )),
+                          ),
+                        ],
+                      )
+                    ],
+                  )),
+            ),
+          );
+        });
   }
 
   void createMCQuiz() {
@@ -100,7 +182,6 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 244, 253),
       appBar: AppBar(
@@ -203,7 +284,11 @@ class _QuizPageState extends State<QuizPage> {
                           itemCount: DataRepository.myQuizList.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return MyQuiz(quiz: DataRepository.myQuizList[index], typeQuiz: 0);
+                            return GestureDetector(
+                                onLongPress: () => showWarning(index),
+                                child: MyQuiz(
+                                    quiz: DataRepository.myQuizList[index],
+                                    typeQuiz: 0));
                           }),
                     ),
               const SizedBox(

@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quizzard/pages/editQuiz_page.dart';
 
 class NewTFQuestions extends StatefulWidget {
   final qController;
-  final choiceTrue;
-  final choiceFalse;
+
   VoidCallback onCreate;
   VoidCallback onCancel;
   VoidCallback onUpdate;
-  bool trueIsClicked;
-  bool falseIsClicked;
 
   String action;
 
   NewTFQuestions(
       {super.key,
       required this.qController,
-      required this.choiceTrue,
-      required this.choiceFalse,
+     
       required this.onCreate,
       required this.onCancel,
       required this.onUpdate,
-      required this.trueIsClicked,
-      required this.falseIsClicked,
       required this.action});
 
   @override
@@ -33,15 +28,15 @@ class _NewTFQuestionsState extends State<NewTFQuestions> {
 
   void clickedTrue() {
     setState(() {
-      widget.trueIsClicked = true;
-      widget.falseIsClicked = false;
+      EditQuizPage.trueClicked = true;
+      EditQuizPage.falseClicked = false;
     });
   }
 
   void clickedFalse() {
     setState(() {
-      widget.trueIsClicked = false;
-      widget.falseIsClicked = true;
+      EditQuizPage.trueClicked = false;
+      EditQuizPage.falseClicked = true;
     });
   }
 
@@ -110,12 +105,12 @@ class _NewTFQuestionsState extends State<NewTFQuestions> {
                       height: 51,
                       width: 110,
                       decoration: BoxDecoration(
-                          color: widget.trueIsClicked ? Color(0xFF54AD67) : Colors.white,
+                          color: EditQuizPage.trueClicked ? Color(0xFF54AD67) : Colors.white,
                           borderRadius: BorderRadius.circular(13)),
                       child: Center(
                           child: Text("TRUE",
                               style: TextStyle(
-                                color: widget.trueIsClicked ? Colors.white : Colors.black,
+                                color: EditQuizPage.trueClicked ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,
                                   fontStyle: FontStyle.italic))),
@@ -127,12 +122,12 @@ class _NewTFQuestionsState extends State<NewTFQuestions> {
                       height: 51,
                       width: 110,
                       decoration: BoxDecoration(
-                          color: widget.falseIsClicked ? Color(0xFF54AD67) : Colors.white,
+                          color: EditQuizPage.falseClicked ? Color(0xFF54AD67) : Colors.white,
                           borderRadius: BorderRadius.circular(13)),
                       child: Center(
                           child: Text("FALSE",
                               style: TextStyle(
-                                color: widget.falseIsClicked ? Colors.white : Colors.black,
+                                color: EditQuizPage.falseClicked ? Colors.white : Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,
                                   fontStyle: FontStyle.italic))),

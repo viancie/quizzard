@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quizzard/pages/editQuiz_page.dart';
 
 class NewMCQuestion extends StatefulWidget {
   final qController;
@@ -10,10 +11,6 @@ class NewMCQuestion extends StatefulWidget {
   VoidCallback onSaveQuestion;
   VoidCallback onCancel;
   VoidCallback onUpdate;
-  bool aIsClicked;
-  bool bIsClicked;
-  bool cIsClicked;
-  bool dIsClicked;
   String action; // either create or update
   
   NewMCQuestion(
@@ -26,10 +23,6 @@ class NewMCQuestion extends StatefulWidget {
       required this.onSaveQuestion,
       required this.onCancel,
       required this.onUpdate,
-      required this.aIsClicked,
-      required this.bIsClicked,
-      required this.cIsClicked,
-      required this.dIsClicked,
       required this.action,
       });
 
@@ -40,29 +33,29 @@ class NewMCQuestion extends StatefulWidget {
 class _NewMCQuestionState extends State<NewMCQuestion> {
   void clickedA() {
     setState(() {
-      widget.aIsClicked = true;
-      widget.bIsClicked = widget.cIsClicked = widget.dIsClicked = false;
+      EditQuizPage.aClicked = true;
+      EditQuizPage.bClicked = EditQuizPage.cClicked = EditQuizPage.dClicked = false;
     });
   }
 
   void clickedB() {
     setState(() {
-      widget.bIsClicked = true;
-      widget.aIsClicked = widget.cIsClicked = widget.dIsClicked = false;
+      EditQuizPage.bClicked = true;
+      EditQuizPage.aClicked = EditQuizPage.cClicked = EditQuizPage.dClicked = false;
     });
   }
 
   void clickedC() {
     setState(() {
-      widget.cIsClicked = true;
-      widget.aIsClicked = widget.bIsClicked = widget.dIsClicked = false;
+      EditQuizPage.cClicked = true;
+      EditQuizPage.aClicked = EditQuizPage.bClicked = EditQuizPage.dClicked = false;
     });
   }
 
   void clickedD() {
     setState(() {
-      widget.dIsClicked = true;
-      widget.aIsClicked = widget.bIsClicked = widget.cIsClicked = false;
+      EditQuizPage.dClicked = true;
+      EditQuizPage.aClicked = EditQuizPage.bClicked = EditQuizPage.cClicked = false;
     });
   }
 
@@ -260,12 +253,12 @@ class _NewMCQuestionState extends State<NewMCQuestion> {
                       height: 40,
                       width: 40,
                       decoration: BoxDecoration(
-                          color: widget.aIsClicked ? Color(0xFF52C3FF) : Colors.white,
+                          color: EditQuizPage.aClicked ? Color(0xFF52C3FF) : Colors.white,
                           borderRadius: BorderRadius.circular(9)),
                       child: Center(
                         child: Text("A",
                             style: TextStyle(
-                                color: widget.aIsClicked ? Colors.white : Colors.black,
+                                color: EditQuizPage.aClicked ? Colors.white : Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w800)),
                       ),
@@ -277,12 +270,12 @@ class _NewMCQuestionState extends State<NewMCQuestion> {
                       height: 40,
                       width: 40,
                       decoration: BoxDecoration(
-                          color: widget.bIsClicked ? Color(0xFF52C3FF) : Colors.white,
+                          color: EditQuizPage.bClicked ? Color(0xFF52C3FF) : Colors.white,
                           borderRadius: BorderRadius.circular(9)),
                       child: Center(
                         child: Text("B",
                             style: TextStyle(
-                                color: widget.bIsClicked ? Colors.white : Colors.black,
+                                color: EditQuizPage.bClicked ? Colors.white : Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w800)),
                       ),
@@ -294,12 +287,12 @@ class _NewMCQuestionState extends State<NewMCQuestion> {
                       height: 40,
                       width: 40,
                       decoration: BoxDecoration(
-                          color: widget.cIsClicked ? Color(0xFF52C3FF) : Colors.white,
+                          color: EditQuizPage.cClicked ? Color(0xFF52C3FF) : Colors.white,
                           borderRadius: BorderRadius.circular(9)),
                       child: Center(
                         child: Text("C",
                             style: TextStyle(
-                                color: widget.cIsClicked ? Colors.white : Colors.black,
+                                color: EditQuizPage.cClicked  ? Colors.white : Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w800)),
                       ),
@@ -311,12 +304,12 @@ class _NewMCQuestionState extends State<NewMCQuestion> {
                       height: 40,
                       width: 40,
                       decoration: BoxDecoration(
-                          color: widget.dIsClicked ? Color(0xFF52C3FF) : Colors.white,
+                          color: EditQuizPage.dClicked  ? Color(0xFF52C3FF) : Colors.white,
                           borderRadius: BorderRadius.circular(9)),
                       child: Center(
                         child: Text("D",
                             style: TextStyle(
-                                color: widget.dIsClicked ? Colors.white : Colors.black,
+                                color: EditQuizPage.dClicked  ? Colors.white : Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w800)),
                       ),

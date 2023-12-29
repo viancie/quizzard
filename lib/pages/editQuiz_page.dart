@@ -13,6 +13,14 @@ import 'package:quizzard/model/quiz.dart';
 
 class EditQuizPage extends StatefulWidget {
   final Quiz quiz;
+  static bool aClicked = false;
+  static bool bClicked = false;
+  static bool cClicked = false;
+  static bool dClicked = false;
+
+  static bool trueClicked = false;
+  static bool falseClicked = false;
+
   const EditQuizPage({super.key, required this.quiz});
 
   @override
@@ -27,14 +35,6 @@ class _EditQuizPageState extends State<EditQuizPage> {
   final TextEditingController choiceDController = TextEditingController();
 
   final TextEditingController answerController = TextEditingController();
-
-  bool aClicked = false;
-  bool bClicked = false;
-  bool cClicked = false;
-  bool dClicked = false;
-
-  bool trueClicked = false;
-  bool falseClicked = false;
 
   late Iterable<Question> ques;
   int selectedQIndex = 0;
@@ -52,9 +52,29 @@ class _EditQuizPageState extends State<EditQuizPage> {
         tempQ.choices[1] = choiceBController.text;
         tempQ.choices[2] = choiceCController.text;
         tempQ.choices[3] = choiceDController.text;
+
+        // answer
+        if (EditQuizPage.aClicked) {
+          widget.quiz.questionTable[tempQ] = tempQ.choices[0];
+        } else if (EditQuizPage.bClicked) {
+          widget.quiz.questionTable[tempQ] = tempQ.choices[1];
+        } else if (EditQuizPage.cClicked) {
+          widget.quiz.questionTable[tempQ] = tempQ.choices[2];
+        } else {
+          widget.quiz.questionTable[tempQ] = tempQ.choices[3];
+        }
       } else if (widget.quiz.type == "2") {
         // true or false
         tempQ.qText = qController.text;
+
+        // udpate answer
+        if (EditQuizPage.trueClicked) {
+          widget.quiz.questionTable[tempQ] = "TRUE";
+        }
+        else {
+          widget.quiz.questionTable[tempQ] = "FALSE";
+        }
+
       } else if (widget.quiz.type == "3") {
         // fill in the blanks
         tempQ.qText = qController.text;
@@ -71,6 +91,12 @@ class _EditQuizPageState extends State<EditQuizPage> {
       choiceCController.clear();
       choiceDController.clear();
       answerController.clear();
+      EditQuizPage.aClicked = false;
+      EditQuizPage.bClicked = false;
+      EditQuizPage.cClicked = false;
+      EditQuizPage.dClicked = false;
+      EditQuizPage.falseClicked = false;
+      EditQuizPage.trueClicked = false;
       Navigator.pop(context);
     });
   }
@@ -81,6 +107,12 @@ class _EditQuizPageState extends State<EditQuizPage> {
     showDialog(
         context: context,
         builder: (context) {
+          EditQuizPage.aClicked = false;
+          EditQuizPage.bClicked = false;
+          EditQuizPage.cClicked = false;
+          EditQuizPage.dClicked = false;
+          EditQuizPage.falseClicked = false;
+          EditQuizPage.trueClicked = false;
           // for multiple chocie
           Question tempQ = ques.elementAt(index);
 
@@ -92,14 +124,14 @@ class _EditQuizPageState extends State<EditQuizPage> {
             choiceCController.text = tempQ.choices[2];
             choiceDController.text = tempQ.choices[3];
 
-            if (widget.quiz.questionTable[tempQ] == "A") {
-              aClicked = true;
-            } else if (widget.quiz.questionTable[tempQ] == "B") {
-              bClicked = true;
-            } else if (widget.quiz.questionTable[tempQ] == "C") {
-              cClicked = true;
+            if (widget.quiz.questionTable[tempQ] == tempQ.choices[0]) {
+              EditQuizPage.aClicked = true;
+            } else if (widget.quiz.questionTable[tempQ] == tempQ.choices[1]) {
+              EditQuizPage.bClicked = true;
+            } else if (widget.quiz.questionTable[tempQ] == tempQ.choices[2]) {
+              EditQuizPage.cClicked = true;
             } else {
-              dClicked = true;
+              EditQuizPage.dClicked = true;
             }
 
             return NewMCQuestion(
@@ -111,10 +143,6 @@ class _EditQuizPageState extends State<EditQuizPage> {
                 onSaveQuestion: () {},
                 onCancel: () => Navigator.pop(context),
                 onUpdate: () => saveChanges(index),
-                aIsClicked: aClicked,
-                bIsClicked: bClicked,
-                cIsClicked: cClicked,
-                dIsClicked: dClicked,
                 action: "Update");
           }
 
@@ -122,14 +150,19 @@ class _EditQuizPageState extends State<EditQuizPage> {
           else if (widget.quiz.type == "2") {
             qController.text = tempQ.qText;
 
+            if (widget.quiz.questionTable[tempQ] == "TRUE") {
+              EditQuizPage.trueClicked = true;
+            }
+            else{
+              EditQuizPage.falseClicked = true;
+   
+            }
+          
+
             return NewTFQuestions(
               qController: qController,
-              choiceTrue: "TRUE",
-              choiceFalse: "FALSE",
               onCreate: () {},
               onCancel: () => Navigator.pop(context),
-              trueIsClicked: trueClicked,
-              falseIsClicked: falseClicked,
               onUpdate: () => saveChanges(index),
               action: "Update",
             );
@@ -178,13 +211,13 @@ class _EditQuizPageState extends State<EditQuizPage> {
       // create choices
       List<String> choices = [];
       if (widget.quiz.type == "1") {
-        choices.add(choiceAController.text);
-        choices.add(choiceBController.text);
-        choices.add(choiceCController.text);
-        choices.add(choiceDController.text);
+        choices.add("A) ${choiceAController.text}");
+        choices.add("B) ${choiceBController.text}");
+        choices.add("C) ${choiceCController.text}");
+        choices.add("D) ${choiceDController.text}");
       } else if (widget.quiz.type == "2") {
-        choices.add(choiceAController.text);
-        choices.add(choiceBController.text);
+        choices.add("TRUE");
+        choices.add("FALSE");
       }
 
       // create quesion
@@ -192,19 +225,19 @@ class _EditQuizPageState extends State<EditQuizPage> {
 
       // for multiple choice questions
       if (widget.quiz.type == "1") {
-        if (aClicked) {
-          widget.quiz.questionTable[q] = "A";
-        } else if (bClicked) {
-          widget.quiz.questionTable[q] = "B";
-        } else if (cClicked) {
-          widget.quiz.questionTable[q] = "C";
+        if (EditQuizPage.aClicked) {
+          widget.quiz.questionTable[q] = choices[0];
+        } else if (EditQuizPage.bClicked) {
+          widget.quiz.questionTable[q] = choices[1];
+        } else if (EditQuizPage.cClicked) {
+          widget.quiz.questionTable[q] = choices[2];
         } else {
-          widget.quiz.questionTable[q] = "D";
+          widget.quiz.questionTable[q] = choices[3];
         }
 
         // for true or false question
       } else if (widget.quiz.type == "2") {
-        if (trueClicked) {
+        if (EditQuizPage.trueClicked) {
           widget.quiz.questionTable[q] = "TRUE";
         } else {
           widget.quiz.questionTable[q] = "FALSE";
@@ -242,6 +275,12 @@ class _EditQuizPageState extends State<EditQuizPage> {
           choiceCController.clear();
           choiceDController.clear();
           answerController.clear();
+          EditQuizPage.aClicked = false;
+          EditQuizPage.bClicked = false;
+          EditQuizPage.cClicked = false;
+          EditQuizPage.dClicked = false;
+          EditQuizPage.falseClicked = false;
+          EditQuizPage.trueClicked = false;
 
           if (widget.quiz.type == "1") {
             // multiple choice
@@ -253,10 +292,6 @@ class _EditQuizPageState extends State<EditQuizPage> {
               choiceDController: choiceDController,
               onSaveQuestion: saveQuestion,
               onCancel: () => Navigator.pop(context),
-              aIsClicked: aClicked,
-              bIsClicked: bClicked,
-              cIsClicked: cClicked,
-              dIsClicked: dClicked,
               action: 'Create',
               onUpdate: () {},
             );
@@ -264,12 +299,8 @@ class _EditQuizPageState extends State<EditQuizPage> {
             // true or false
             return NewTFQuestions(
               qController: qController,
-              choiceTrue: "TRUE",
-              choiceFalse: "FALSE",
               onCreate: saveQuestion,
               onCancel: () => Navigator.pop(context),
-              trueIsClicked: trueClicked,
-              falseIsClicked: falseClicked,
               onUpdate: () {},
               action: "Create",
             );
