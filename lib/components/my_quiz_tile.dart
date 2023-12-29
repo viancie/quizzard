@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:quizzard/model/quiz.dart';
 import 'package:quizzard/pages/editQuiz_page.dart';
+import 'package:quizzard/pages/startQuiz_page.dart';
 
 class MyQuiz extends StatefulWidget {
   final Quiz quiz;
@@ -90,7 +91,11 @@ class _MyQuiz extends State<MyQuiz> {
 
                           GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, '/startQuiz_page');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            StartQuiz(quiz: widget.quiz)));
                               },
                               child:
                                   SvgPicture.asset("lib/assets/play_icon.svg")),
@@ -118,7 +123,11 @@ class _MyQuiz extends State<MyQuiz> {
                       padding: const EdgeInsets.only(left: 100),
                       child: GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, '/startQuiz_page');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        StartQuiz(quiz: widget.quiz)));
                           },
                           child: SvgPicture.asset("lib/assets/play_icon.svg")),
                     ),

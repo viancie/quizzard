@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       //'subtopic_page': (context) => const SubtopicPage(),
       '/bookmark_page': (context) => BookmarkPage(),
       '/quiz_page': (context) => const QuizPage(),
-      '/startQuiz_page': (context) => StartQuiz(),
+      //'/startQuiz_page': (context) => StartQuiz(),
       // '/editQuiz_page': (context) => const EditQuizPage(),
     });
   }

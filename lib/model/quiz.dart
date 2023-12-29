@@ -31,4 +31,6 @@ class Quiz {
   void addQuestion(Question q, String answer) {
     questionTable.addAll({q: answer});
   }
+
+  HashMap<Question, String> get getQuestionTable => questionTable;
 }
