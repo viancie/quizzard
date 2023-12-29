@@ -26,7 +26,7 @@ class _HeartButtonState extends State<HeartButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: toggleLike,
+      onTap: widget.onTap,
       child: Icon(
         widget.isLiked ? Icons.favorite : Icons.favorite_outline,
         color: widget.isLiked ? widget.colorClicked : widget.colorNotClicked,
