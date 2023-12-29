@@ -40,7 +40,7 @@ class _TopicTileState extends State<TopicTile> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SvgPicture.asset(
+              Image.asset(
                 widget.imageUrl,
                 height: 120,
               ),
@@ -56,6 +56,7 @@ class _TopicTileState extends State<TopicTile> {
                       DataRepository.favoriteList.add(widget.topic);
                     }
                     widget.topic.liked = !widget.topic.liked;
+                    DataRepository.updateTopicList();
                   });
                 },
                 colorClicked: const Color.fromARGB(255, 112, 31, 40),

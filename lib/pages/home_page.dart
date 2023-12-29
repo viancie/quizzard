@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hive/hive.dart';
 import 'package:quizzard/controller/datarepo.dart';
 import 'package:quizzard/model/topic.dart';
 import 'package:quizzard/pages/bookmark_page.dart';
@@ -14,11 +15,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _myBox = Hive.box('myBox');
+
   int index = 0;
   @override
   void initState() {
     super.initState();
-    DataRepository.loadData();
+    if (_myBox.get("TOPIC LIST") == null) {
+      DataRepository.loadData();
+    } else {
+      DataRepository.load();
+    }
   }
   //List<Topic> topicList = DataRepository.topicList;
 
