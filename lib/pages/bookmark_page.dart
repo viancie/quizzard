@@ -3,6 +3,7 @@ import 'package:quizzard/components/search_button.dart';
 import 'package:quizzard/components/subtopic_tile.dart';
 import 'package:quizzard/controller/datarepo.dart';
 import 'package:quizzard/model/subtopic.dart';
+import 'package:quizzard/model/topic.dart';
 
 class BookmarkPage extends StatelessWidget {
   BookmarkPage({super.key});
@@ -23,7 +24,10 @@ class BookmarkPage extends StatelessWidget {
         padding: const EdgeInsets.all(25),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const SizedBox(height: 20),
-          const SearchButton(),
+          SearchButton(
+              type: "3",
+              topic:
+                  Topic(topicName: "rawr", description: "ngi", isLiked: "wow")),
           const SizedBox(height: 30),
           const Text(
             "Bookmarks",
