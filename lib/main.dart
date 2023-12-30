@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:quizzard/controller/datarepo.dart';
+import 'package:quizzard/model/topic.dart';
 import 'package:quizzard/pages/bookmark_page.dart';
 import 'package:quizzard/pages/editQuiz_page.dart';
 import 'package:quizzard/pages/home_page.dart';
@@ -13,10 +14,13 @@ import 'package:quizzard/pages/subtopic_page.dart';
 import 'package:quizzard/pages/topicView_page.dart';
 import 'package:quizzard/pages/topic_page.dart';
 
-void main() async {
+late Box box;
+Future<void> main() async {
   await Hive.initFlutter();
 
-  final box = await Hive.openBox('my box');
+  final box = await Hive.openBox('myBox1');
+
+  // DataRepository.loadData();
 
   runApp(const MyApp());
 }

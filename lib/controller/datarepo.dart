@@ -2,7 +2,6 @@ import 'dart:collection';
 import 'dart:io';
 import 'dart:math';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart';
 import 'package:quizzard/model/questions.dart';
@@ -18,9 +17,9 @@ class DataRepository {
   static List<Topic> _newestList = [];
   static List<Subtopic> _bookmarkList = [];
   static List<Quiz> _myQuizList = [];
-  static final _myBox = Hive.box('my box');
+  static final _myBox = Hive.box('myBox1');
 
-  static Future<void> loadData() async {
+  static void loadData() async {
     //loading topic data
     String raw = await rootBundle.loadString('lib/files/topic_data.tsv');
     List<List<dynamic>> lines =
@@ -164,6 +163,7 @@ class DataRepository {
 
   static void updateTopicList() {
     _myBox.put("TOPIC LIST", _topicList);
+    //_myBox.close();
   }
 
   static List<Topic> randomizer() {

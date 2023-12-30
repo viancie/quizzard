@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:quizzard/model/quiz.dart';
 import 'package:quizzard/pages/editQuiz_page.dart';
 import 'package:quizzard/pages/playQuiz_page.dart';
-import 'package:quizzard/pages/startQuiz_page.dart';
 
 class MyQuiz extends StatefulWidget {
   final Quiz quiz;
@@ -37,7 +36,7 @@ class _MyQuiz extends State<MyQuiz> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(bottom: 15, right: 10),
+        margin: const EdgeInsets.only(bottom: 15, right: 10),
         width: 171,
         decoration: BoxDecoration(
             color: Colors.white,

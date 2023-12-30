@@ -58,8 +58,9 @@ class _QuizPageState extends State<QuizPage> {
                               fontSize: 18, fontWeight: FontWeight.w500),
                         ),
                       ),
-              
-                      SizedBox(height: 15,),
+                      SizedBox(
+                        height: 15,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -185,6 +186,7 @@ class _QuizPageState extends State<QuizPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 244, 253),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(

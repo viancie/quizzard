@@ -15,10 +15,19 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  List<Subtopic> subtopics = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if (widget.type == "2") {
+      subtopics = List.from(widget.topic.getSubtopics);
+    }
+  }
+
   int length = 0;
   List<Topic> topicList = List.from(DataRepository.topicList);
   List<Subtopic> subtopicList = List.from(DataRepository.bookmarkList);
-  List<Subtopic> subtopics = [];
 
   void lengthNum() {
     if (widget.type == "1") {
@@ -41,9 +50,8 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void updateList2(String value) {
-    List<Subtopic> lists = List.from(widget.topic.getSubtopics);
     setState(() {
-      subtopics = lists
+      subtopics = widget.topic.getSubtopics
           .where((element) => element.getSubtopicName!
               .toLowerCase()
               .contains(value.toLowerCase()))
@@ -65,9 +73,6 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.type == "2") {
-      subtopics = List.from(widget.topic.getSubtopics);
-    }
     lengthNum();
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 244, 253),

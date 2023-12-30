@@ -39,7 +39,7 @@ class _SubtopicTileState extends State<SubtopicTile> {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             widget.subtopic.getSubtopicName,
-            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
+            style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17),
           ),
           BookmarkButton(
               isLiked: widget.subtopic.getBookmarked,
