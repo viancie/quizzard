@@ -14,7 +14,7 @@ class TopicPage extends StatefulWidget {
 }
 
 class _TopicPageState extends State<TopicPage> {
-  final _myBox = Hive.box('myBox');
+  final _myBox = Hive.box('myBox1');
   @override
   void initState() {
     // TODO: implement initState
@@ -64,6 +64,7 @@ class _TopicPageState extends State<TopicPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 230, 244, 253),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(

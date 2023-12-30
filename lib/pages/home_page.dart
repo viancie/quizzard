@@ -15,19 +15,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _myBox = Hive.box('myBox');
+  final _myBox = Hive.box('myBox1');
 
   int index = 0;
-  @override
-  void initState() {
-    super.initState();
-    if (_myBox.get("TOPIC LIST") == null) {
-      DataRepository.loadData();
-    } else {
-      DataRepository.load();
-    }
-  }
-  //List<Topic> topicList = DataRepository.topicList;
 
   @override
   Widget build(BuildContext context) {
